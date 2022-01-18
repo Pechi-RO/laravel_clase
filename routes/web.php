@@ -22,3 +22,4 @@ Route::get('/', function () {
 
 Route::resource('posts',PostController::class);
 Route::resource('categories',CategoryController::class);
+Route::get('posts1/{id}',"App\Http\Controllers\PostController@index1")->name("posts.index1");

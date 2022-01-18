@@ -38,7 +38,10 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nombre'=>['required','string','min:3','unique:categories,nombre'],
+            'descripcion'=>['$required','string','min:5']
+        ]);
     }
 
     /**
@@ -60,7 +63,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        return view('categories.edit',compact('category'));
     }
 
     /**
@@ -72,7 +75,13 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        $request->validate([
+            'nombre'=>['required','string','min:3','unique:categories,nombre,'.$category->id],
+            'descripcion'=>['$required','string','min:5']
+        ]);
+        $category->update($request->all());
+        return redirect()->route('categories.index')->with('mensaje','categoria editada');
+
     }
 
     /**
@@ -83,6 +92,7 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        $category->delete();
+        return redirect()->route('categories.index')->with('mensaje','categoria borrada');
     }
 }
