@@ -40,8 +40,10 @@ class CategoryController extends Controller
     {
         $request->validate([
             'nombre'=>['required','string','min:3','unique:categories,nombre'],
-            'descripcion'=>['$required','string','min:5']
+            'descripcion'=>['required','string','min:5']
         ]);
+        Category::create($request->all());
+        return redirect()->route('categories.index')->with('mensaje', "Categoria Creada.");
     }
 
     /**

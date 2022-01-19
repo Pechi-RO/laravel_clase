@@ -3,7 +3,7 @@
 Inicio Posts
 @endsection
 @section('cabecera')
-Listado de Posts @if(isset($flag)) Categoria: {{$posts->category_id}}@endif
+Listado de Posts @if(isset($flag)) Categoria: {{$id}} @endif
 @endsection
 @section('contenido')
 
@@ -12,6 +12,7 @@ Listado de Posts @if(isset($flag)) Categoria: {{$posts->category_id}}@endif
   <a href="{{route('posts.create')}}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"><i class="fas fa-plus"></i>Nuevo Post</a>
 @if(isset($flag))
 <a href="{{route('posts.index')}}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Ver todos</a>
+@endif
 </div>
 <x-tabla1>
 
@@ -52,15 +53,18 @@ Listado de Posts @if(isset($flag)) Categoria: {{$posts->category_id}}@endif
                     {{$item->contenido}}
                   </td>
                   <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                    Borrar<br>
-                    Editar
+                    <a href="{{route('posts.edit',$item)}}" class="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded"><i class="fas fa-edit"></i></a>
+                  
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                  <form action="{{route('posts.destroy',$item)}}" method="POST" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"></form>
+                  @csrf
+                  @method('DELETE')
+                  <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"><i class="fas fa-trash"></i></button>
                 </td>
                 </tr>
                 @endforeach
                 
-              
-
               {{$posts->links()}}
 </x-tabla1>
-
 @endsection

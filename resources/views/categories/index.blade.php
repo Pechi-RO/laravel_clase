@@ -50,7 +50,7 @@ Listado de Categorías
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                     <a href="{{route('categories.edit',$item)}}" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded"><i class="fas fa-edit"></i></a>
-                </td>
+                </td> 
                 <td class="px-6 py-4">
                     <form action="{{route('categories.destroy',$item)}}" method="POST">
                     @csrf
