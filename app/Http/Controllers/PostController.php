@@ -47,7 +47,7 @@ class PostController extends Controller
     {
         //Hacemos las validaciones
         $request->validate([
-            'titulo'=>['required','string','min:3','max:40','unique:posts:titulo'],
+            'titulo'=>['required','string','min:3','max:40','unique:posts,titulo'],
             'resumen'=>['required','string','min:5'],
             'contenido'=>['required','string','min:10']
         ]);
@@ -78,7 +78,7 @@ class PostController extends Controller
     public function edit(Post $post)
     {
         $categorias=Category::orderBy('nombre')->get();
-        return view('posts.edit',compact('post'));
+        return view('posts.edit',compact('post','categorias'));
     }
 
     /**
@@ -91,7 +91,7 @@ class PostController extends Controller
     public function update(Request $request, Post $post)
     {
         $request->validate([
-            'titulo'=>['required','string','min:3','max:40','unique:posts:titulo,'.$post->id],
+            'titulo'=>['required','string','min:3','max:40','unique:posts,titulo,'.$post->id],
             'resumen'=>['required','string','min:5'],
             'contenido'=>['required','string','min:10']
         ]);

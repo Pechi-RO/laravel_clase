@@ -38,7 +38,7 @@ Editando Post
 <label for="cat" class="block text-sm font-medium text-gray-700 mb-2">Categoria Post</label>
 <select name="category_id" class="py-1 px-2 focus:ring-indigo-500 focus:border-indigo-500">
     <!--ESTO SE HA MODIFICADO RESPECTO DEL CREATE-->
-    @foreach($categories as $item)
+    @foreach($categorias as $item)
     <option value="{{$item->id}}"
         @if($item->id==$post->category_id) selected @endif>{{$item->nombre}}</option>
     @endforeach
